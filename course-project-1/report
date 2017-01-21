@@ -33,6 +33,7 @@ Prepared statement is getted by expression
 
 and name could be added to prepared statement by method setString of class PreparedStatement. Then statement should execute by execute-method of the same class and then close.
 
+After this, delete the two database files at project root that are made when SQL-database is initialized. Otherway some later synchronizising can fault.
 
 II) Cross-page scripting in feelings-page
 
