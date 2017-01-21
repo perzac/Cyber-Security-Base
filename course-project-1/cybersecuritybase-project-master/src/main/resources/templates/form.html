@@ -1,0 +1,40 @@
+<!--
+  pexak
+  Cyber Security Base - Course Project I
+
+  Course given by University of Helsinki in collaboration with F-Secure 
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Sign up form</title>
+    </head>
+    <body>
+        
+        <p th:text="${signedup}"></p>
+
+        <h1>Sign up to the event using this form</h1>
+
+        <form action="#" th:action="@{/form}" method="POST">
+            <p><label for="name">Name</label>: <input type="text" name="name" id="name"/></p>
+            <p><label for="address">Address</label>: <input type="text" name="address" id="address"/></p>
+            <p><input type="submit" value="Submit" /></p>
+        </form>
+        
+        <ul style="list-style-type:none">
+            <li><a href="/event" th:href="@{/event}">Home</a></li>
+            <li><a href="/info" th:href="@{/info}">Event information</a></li>
+            <li><a href="/feelings" th:ref="@{/feelings}">Waiting feelings</a></li>
+            <li><a href="/people" th:ref="@{/people}">They make the event</a></li>
+            <li><a href="/feedback" th:ref="@{/feedback}">Workers feedback area.</a></li>
+        </ul>
+        
+        <hr/>
+        <p><a href="/admin" th:ref="@{/admin}">Admin area</a></p>
+        <form action="#" th:action="@{/logout}" method="POST">
+            <input type="submit" value="Logout"/>
+        </form>
+        
+    </body>
+</html>

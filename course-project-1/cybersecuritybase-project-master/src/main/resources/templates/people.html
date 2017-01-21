@@ -1,0 +1,43 @@
+<!--
+  pexak
+  Cyber Security Base - Course Project I
+
+  Course given by University of Helsinki in collaboration with F-Secure 
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>People</title>
+    </head>
+    <body>
+        
+        <h1>We make the event!</h1>
+        
+        <h4 style="max-width:30em; margin-left:5em" th:text="${shownName}" />
+        <div style="max-width:30em; margin-left:5em" th:text="${shownDeclaration}" />
+        
+        <ul style="list-style-type:none; max-width:40em">
+            <li th:each="person : ${people}">
+                <a th:href="@{/people/{id}(id=${person.sotu})}" th:text="${person.firstName}"/>
+            </li>
+        </ul>
+        
+        <hr/>
+       
+        <ul style="list-style-type:none">
+            <li><a href="/event" th:href="@{/event}">Home</a></li>
+            <li><a href="/form" th:href="@{/form}">Sign up to the event</a></li>
+            <li><a href="/info" th:href="@{/info}">Event information</a></li>
+            <li><a href="/feelings" th:ref="@{/feelings}">Waiting feelings</a></li>
+            <li><a href="/feedback" th:ref="@{/feedback}">Workers feedback area.</a></li>
+        </ul>
+        
+        <hr/>
+        <p><a href="/admin" th:ref="@{/admin}">Admin area</a></p>
+        <form action="#" th:action="@{/logout}" method="POST">
+            <input type="submit" value="Logout"/>
+        </form>
+        
+    </body>
+</html>

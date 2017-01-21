@@ -1,0 +1,49 @@
+<!--
+  pexak
+  Cyber Security Base - Course Project I
+
+  Course given by University of Helsinki in collaboration with F-Secure 
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Feelings</title>
+    </head>
+    <body>
+        
+        <h1>Feelengs of participiants</h1>
+        
+        <ul style="list-style-type:none">
+            <li th:each="feeling : ${feelingsList}" style="max-width:40em">
+                <p th:utext="${feeling}"></p>
+            </li>
+        </ul>
+        
+        <hr/>
+        
+        <h3>Write your feelings!</h3>
+        
+        <form action="#" th:action="@{/feelings}" method="POST">
+            <p><label for="feeling">Feelings</label>:</p> <textarea name="feeling" rows="15" cols="40"/>
+            <p><input type="submit" value="Submit" /></p>
+        </form>
+        
+        <hr/>
+        
+        <ul style="list-style-type:none">
+            <li><a href="/event" th:href="@{/event}">Home</a></li>
+            <li><a href="/form" th:href="@{/form}">Sign up to the event</a></li>
+            <li><a href="/info" th:href="@{/info}">Event information</a></li>
+            <li><a href="/people" th:ref="@{/people}">They make the event</a></li>
+            <li><a href="/feedback" th:ref="@{/feedback}">Workers feedback area.</a></li>
+        </ul>
+        
+        <hr/>
+        <p><a href="/admin" th:ref="@{/admin}">Admin area</a></p>
+        <form action="#" th:action="@{/logout}" method="POST">
+            <input type="submit" value="Logout"/>
+        </form>
+
+    </body>
+</html>

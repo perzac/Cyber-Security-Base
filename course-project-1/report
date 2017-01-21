@@ -1,0 +1,56 @@
+Cyber Security Base - Course Project 1
+
+I have created my project based on the provided starter code. Start page is for signup. Signups are stored in the SQL-database, where every signup gets own seat number, and to ORM Signup-repository. These data storages will be keeped synchronized just adding and deleting information to and from both in the same methods. SQL-database will be initialized from files on the root directory of the project. After succesful signup application load the page, where is link to info-page. There one can ask seat number for signed name.
+
+Other public pages are event, feelings and people. Event-page is just "homepage" where are links to other pages. Feelengs-page contains list of messages from (unouthorized) users, and there is a form for writing one. Messages are stored to List-object. On the people-page exists list of people who work for the event, and by clicking the name user gets description of the worker. Information about workers is saved to ORM Person-repository.
+
+Pages requiring authorization are feedback and admin. Feedback-page is for workers to give trusted feedback to organizers. Every user logged in sees own feedback titles and is able to write more feedbacks or delete old ones. By clicking the title of the message the content of that message is shown and is also loaded to form, where user can use it for new feedback-message. Admin-page allows admin-role having users to add and delete signups. List of the signed participants is shown on the down part of the side.
+
+Accounts that gives authorizations to users on the site are stored ORM Account-repository. Accounts have one to many relation ship to feedbacks which are also stored to ORM-repository. Also user roles are related as one to many for accounts i.e. user roles are different Role-objects for different users even the authorizations would be identical.
+
+Some instructions:
+
+Existing usernames and passwords are found from CustomUserDetailsService.java.
+
+
+Vulnerabilities:
+
+I) SQL-injection in info-page
+
+Just type 
+
+  Jack1'; DELETE FROM Signup WHERE name = 'Ann5
+  
+to form and 'Ann5' is no more signed up to the event. One can fix this by using prepared statements for SQL query. Query string is
+
+  "SELECT seat FROM Signup WHERE name = ?"
+
+Prepared statement is getted by expression
+
+  connection.prepareStatement(query)
+
+and name could be added to prepared statement by method setString of class PreparedStatement. Then statement should execute by execute-method of the same class and then close.
+
+
+II) Cross-page scripting in feelings-page
+
+Type for example
+
+  <script>alert("I'm scripting")</script>
+
+to form and send it. You have added code to site. Fixing this is as easy as deleting the 'u' letter from 'th:utext' in feelengs.html. Then also other html-tags do not work any more.
+
+
+III) Insecure direct object reference in feedback-page
+
+Because the content of feedback will be loaded to form in addition to just under the title, user can type some number to url for seeing feedback of some other user. This issue is to be fixed by removing the th:[u]text-attribute from the textarea.
+
+
+IV) Sensitive data exposure in people-page
+
+PersonRepository uses person-objects' sotu-attribute as Id. And because this is used also as path variable when showing description of a person, it will be wisible to every user. (Sotu is reference of social security number.) Simple fix is to use as Id and path variable the Id which is inherited from the AbstractPersistable-class.
+
+
+V) Missing function level access control in admin-page
+
+Account worker2 has admin-role, even he shouldn't have it. This can be fixed just by deleting the command from CustomUserDetailsService.java, which set role3 to account2.

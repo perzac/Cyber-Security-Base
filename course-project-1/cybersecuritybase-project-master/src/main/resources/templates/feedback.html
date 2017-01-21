@@ -1,0 +1,56 @@
+<!--
+  pexak
+  Cyber Security Base - Course Project I
+
+  Course given by University of Helsinki in collaboration with F-Secure 
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Feedback</title>
+    </head>
+    <body>
+       
+        <h1>Your feedbacks</h1>					
+        
+        <ul style="list-style-type:none; max-width:40em">
+            <li th:if="${feedbacks.empty}">
+                <p>No feedbacks</p>
+            </li>
+            <li th:each="feedback : ${feedbacks}">
+                <h4 th:utext="${feedback.title}"></h4>
+                <form action="#" th:action="@{/feedback/{id}(id=${feedback.id})}" th:method="get"><input type="submit" value="Show content"/></form>
+                <p th:if="${feedback.id}==${number}" th:utext="${content}"></p>
+                <form th:action="@{/feedback/{id}(id=${feedback.id})}" th:method="delete"><input type="submit" value="Delete"/></form>
+            </li>
+            <li>
+                <hr/>
+            </li>
+        </ul>
+												        
+        <h4>Add feedback</h4>
+        
+        <form action="#" th:action="@{/feedback}" method="POST">
+            <p><label for="title">Title</label>:<input type="text" name="title"/> </p>
+            <p><label for="content">Feedback</label>:</p> <textarea name="content" rows="15" cols="40" th:utext="${content}"/>
+            <p><input type="submit" value="Submit" /></p>
+        </form>
+        
+        <ul style="list-style-type:none">
+            <li><a href="/event" th:href="@{/event}">Home</a></li>
+            <li><a href="/form" th:href="@{/form}">Sign up to the event</a></li>
+            <li><a href="/info" th:href="@{/info}">Event information</a></li>
+            <li><a href="/feelings" th:ref="@{/feelings}">Waiting feelings</a></li>
+            <li><a href="/people" th:ref="@{/people}">They make the event</a></li>
+        </ul>
+        
+        <hr/>
+        <p><a href="/admin" th:ref="@{/admin}">Admin area</a></p>
+        
+        <form action="#" th:action="@{/logout}" method="POST">
+            <input type="submit" value="Logout"/>
+        </form>
+        
+    </body>
+</html>

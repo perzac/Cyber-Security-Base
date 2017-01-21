@@ -1,0 +1,30 @@
+<!--
+  pexak
+  Cyber Security Base - Course Project I
+
+  Course given by University of Helsinki in collaboration with F-Secure 
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Event</title>
+    </head>
+    <body>
+       
+        <ul style="list-style-type:none">   
+            <li><a href="/form" th:href="@{/form}">Sign up to the event</a></li>
+            <li><a href="/info" th:href="@{/info}">Event information</a></li>
+            <li><a href="/feelings" th:ref="@{/feelings}">Waiting feelings</a></li>
+            <li><a href="/people" th:ref="@{/people}">They make the event</a></li>
+            <li><a href="/feedback" th:ref="@{/feedback}">Workers feedback area.</a></li>
+        </ul>
+        
+        <hr/>
+        <p><a href="/admin" th:ref="@{/admin}">Admin area</a></p>
+        <form action="#" th:action="@{/logout}" method="POST">
+            <input type="submit" value="Logout"/>
+        </form>
+        
+    </body>
+</html>
