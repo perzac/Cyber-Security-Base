@@ -28,8 +28,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-    /*    http.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS);*/
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/form").permitAll()
