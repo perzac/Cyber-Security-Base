@@ -12,6 +12,8 @@ Some instructions:
 
 Existing usernames and passwords are found from CustomUserDetailsService.java.
 
+SQL-initialization files are at /course-project-1/cybersecuritybase-project-master/sql/ directory.
+
 
 Vulnerabilities:
 
